@@ -1,0 +1,7 @@
+api
+
+Api - to get restaurants
+https://api.tomtom.com/search/2/nearbySearch/.JSON?key=<KEY>&lat=19.1254&lon=72.9992&radius=10000&countrySet=IN&view=IN
+
+api to fetch petrol stations and other categories needed
+https://api.tomtom.com/search/2/categorySearch/pertrol%20station.JSON?key=<KEY>&lat=19.1254&lon=72.9992&radius=10000&countrySet=IN&view=IN
