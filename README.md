@@ -1,6 +1,6 @@
 # SmartWays
-### Hybrid Mobile App which is used for commuters to report incidents.So that others can benefit to select different route to reach destination quickly
+### Hybrid Mobile App which is used for commuters to report incidents based on severity.So that othes commuters can select different route to reach destination quickly
 
-### Steps to Run
+## Steps to Run
 #### npm install
 #### Ionic serve
