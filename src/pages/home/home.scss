@@ -1,0 +1,21 @@
+page-home {
+
+}
+
+
+
+#map {
+    height: 100vh;
+    width: 100vw;
+}
+
+.toast-msg {
+    > div{
+        width: 90% !important;
+         background-color:#da1761!important;
+         text-align: center !important;
+         color: #ffffff !important;
+         margin: 5% !important;
+         border-radius: 10px !important;
+    }
+}

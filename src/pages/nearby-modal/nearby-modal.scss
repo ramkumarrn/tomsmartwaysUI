@@ -1,0 +1,40 @@
+page-nearby-modal {
+
+}
+ion-modal {
+    .modal-wrapper{
+        position: absolute;
+        width: 90%;
+        height: 80%;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        border: 0; 
+        border-radius: 10px;
+    }
+}
+
+.closeicon{
+    color: #fff; 
+    font-size: 25px; 
+    margin-right: 5px;
+  }
+
+  .imgcircle { 
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    width: 70%;
+    background-color:#fafafaee;
+    margin-left: 10px;
+    height: 16vw;
+    display: flex;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+.iconincidents{
+  width: 70%; 
+  height: 70%;
+  margin: auto;
+} 

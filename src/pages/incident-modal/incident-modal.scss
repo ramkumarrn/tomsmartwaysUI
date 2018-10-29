@@ -1,0 +1,173 @@
+page-incident-modal {
+    
+}
+
+ion-modal {
+    .modal-wrapper{
+        position: absolute;
+        width: 90%;
+        height: 80%;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        border: 0; 
+        border-radius: 10px;
+    }
+}
+
+/*.hide-card {
+    -webkit-box-shadow: none!important;
+  }
+  
+  .custom-avatar {
+    height: 30vw;
+    width: 30vw;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+  }*/
+
+  /*.container {
+    position: relative;
+    width: 249px;
+  }
+  
+  .mask {
+    top: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+    height: 195px;
+    width: 100%;
+    background: radial-gradient(circle, transparent 81px, white 81px);
+  }*/
+
+  .imgcircle { 
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    width: 70%;
+    background-color:#fafafaee;
+    margin-left: 10px;
+    height: 16vw;
+    display: flex;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
+}
+.iconincidents{
+  width: 70%; 
+  height: 70%;
+  margin: auto;
+} 
+
+ion-row {
+    text-align: center;
+   // margin-top: 10px;
+}
+
+h6{
+  margin-top: 1rem !important;
+  margin-bottom: 0rem !important;
+  font-weight: normal !important;
+}
+
+.camerarow{
+    border-radius: 10px;
+    width: 100%;
+    background-color:#fefeffd9;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
+}
+.cameradiv{
+    border-radius: 10px;
+    font-size: 25px;
+    width: 100%;
+    background-color:#0e8bf1d9;
+    color: #fff;
+    height: 15vw;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
+    display: table; 
+}
+.cameradivicon{
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.cameratxt{
+  text-align: left !important; 
+  font-size: 20px !important;
+  display: table; 
+  height: 100%;
+}
+.cameratxtspan{
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.closeicon{
+  color: #fff; 
+  font-size: 25px; 
+  margin-right: 5px;
+}
+
+.doneicon{
+  color: #fff; 
+  font-size: 25px; 
+ 
+}
+
+
+.camerapic{
+  margin-top: 2rem;
+  /*border-style: solid;
+  border-width: 1px;
+  border-color: #f01c6d;
+  border-radius: 2px;*/
+}
+.camerapicdiv{
+  border-radius: 10px;
+    width: 100%;
+    background-color:#ffffffd9;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: #fff;
+    height: 30vw;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
+    display: table; 
+    position: relative;
+    background-repeat: no-repeat !important;
+}
+
+.camerapicimg{
+  height: 90% !important;
+  width: 90% !important;
+}
+
+.selectedseverity{
+  border-style: dashed;
+  border-width: 1px;
+  border-color: #f01c6d;
+  border-radius: 2px;
+}
+
+.deleteicon{
+  font-size: 30px; 
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  margin-top: -15px !important;
+  margin-right: -10px !important;
+}
+
+.toast-msg {
+  > div{
+      width: 90% !important;
+       background-color:#da1761!important;
+       text-align: center !important;
+       color: #ffffff !important;
+       margin: 5% !important;
+       border-radius: 10px !important;
+  }
+}

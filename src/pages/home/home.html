@@ -1,0 +1,19 @@
+<ion-content>
+    <ion-fab bottom right>
+        <button ion-fab mini color="dark" (click)="locateMe()" style="margin: 10px; color: #15a9b9">
+            <ion-icon name="ios-compass-outline"></ion-icon>
+        </button>
+        <button ion-fab mini color="primary" (click)="showIncident()" style="margin: 10px">
+            <ion-icon name="md-flash"></ion-icon>
+        </button>
+        <button ion-fab mini color="danger" (click)="sos()" style="margin: 10px;">
+            SOS
+            <!--<ion-icon name="add"></ion-icon>-->
+        </button>
+
+
+    </ion-fab>
+
+
+    <div id="map"></div>
+</ion-content>

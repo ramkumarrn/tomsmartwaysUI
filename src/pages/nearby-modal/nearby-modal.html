@@ -1,0 +1,64 @@
+<!--
+  Generated template for the NearbyModalPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar color="header">
+       <!-- <ion-buttons  *ngIf="!showIncident" start>
+            <button  ion-button (click)="done()"><ion-icon  name="md-checkmark"></ion-icon></button>
+        </ion-buttons>-->
+      <ion-title>{{modalTitle}}</ion-title>
+      <ion-buttons end >
+          <button ion-button (click)="close()"><ion-icon class="closeicon" name="md-close"></ion-icon></button>
+          
+      </ion-buttons>
+    </ion-navbar>
+  
+  </ion-header>
+
+  <ion-content padding>
+      <ion-grid >
+        <ion-row>
+          <ion-col col-4 col-md-3 col-xl-2 class="col-margin" (click)="showNearBy('Gas Station')">
+              <div class = "imgcircle" >
+                <img class="iconincidents" src="assets/imgs/gas1.png"/>
+              </div>
+              <p>Gas Stations</p>
+          </ion-col>
+          <ion-col col-4 col-md-3 col-xl-2 class="col-margin" (click)="showNearBy('Atm')">
+              <div class = "imgcircle">
+                <img class="iconincidents" src="assets/imgs/atm1.png"/>
+              </div>
+              <p>ATMs</p>
+          </ion-col>
+          <ion-col col-4 col-md-3 col-xl-2 class="col-margin" (click)="showNearBy('Hospitals')">
+              <div class = "imgcircle" >
+                <img class="iconincidents" src="assets/imgs/hospital1.png"/>
+              </div>
+              <p>Hospitals</p>
+          </ion-col>
+          <ion-col col-4 col-md-3 col-xl-2 class="col-margin" (click)="showNearBy('Restaurants')">
+              <div class = "imgcircle" >
+                <img class="iconincidents" src="assets/imgs/food1.png"/>
+              </div>
+              <p>Restaurants</p>
+          </ion-col>
+          <ion-col col-4 col-md-3 col-xl-2 class="col-margin" (click)="showNearBy('Malls')">
+              <div class = "imgcircle" >
+                <img class="iconincidents" src="assets/imgs/mall1.png"/>
+              </div>
+              <p>Malls</p>
+          </ion-col>
+          <ion-col col-4 col-md-3 col-xl-2 class="col-margin" (click)="showNearBy('Theatres')">
+              <div class = "imgcircle" >
+                <img class="iconincidents" src="assets/imgs/theatre1.png"/>
+              </div>
+              <p>Theatres</p>
+          </ion-col>
+          
+        </ion-row>
+      </ion-grid>
+      </ion-content>

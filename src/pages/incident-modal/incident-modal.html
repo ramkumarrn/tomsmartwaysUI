@@ -1,0 +1,121 @@
+<!--
+  Generated template for the IncidentModalPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="header">
+     <!-- <ion-buttons  *ngIf="!showIncident" start>
+          <button  ion-button (click)="done()"><ion-icon  name="md-checkmark"></ion-icon></button>
+      </ion-buttons>-->
+    <ion-title>{{modalTitle}}</ion-title>
+    <ion-buttons end >
+        <button *ngIf="!showIncident" ion-button (click)="done()"><ion-icon class="doneicon" name="md-checkmark"></ion-icon></button>
+        
+        <button ion-button (click)="close()"><ion-icon class="closeicon" name="md-close"></ion-icon></button>
+        
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid *ngIf="showIncident">
+    <ion-row>
+      <ion-col col-4 col-md-3 col-xl-2 class="col-margin" (click)="selectIncident('Accident')">
+          <div class = "imgcircle" >
+            <img class="iconincidents" src="assets/imgs/crash1.png"/>
+          </div>
+          <p>Accident</p>
+      </ion-col>
+      <ion-col col-4 col-md-3 col-xl-2 class="col-margin" (click)="selectIncident('Road Block')">
+          <div class = "imgcircle">
+            <img class="iconincidents" src="assets/imgs/barrier1.png"/>
+          </div>
+          <p>Road Block</p>
+      </ion-col>
+      <ion-col col-4 col-md-3 col-xl-2 class="col-margin" (click)="selectIncident('Protest')">
+          <div class = "imgcircle" >
+            <img class="iconincidents" src="assets/imgs/protest1.png"/>
+          </div>
+          <p>Protest</p>
+      </ion-col>
+      <ion-col col-4 col-md-3 col-xl-2 class="col-margin" (click)="selectIncident('Road Work')">
+          <div class = "imgcircle" >
+            <img class="iconincidents" src="assets/imgs/road-work1.png"/>
+          </div>
+          <p>Road Work</p>
+      </ion-col>
+      <ion-col col-4 col-md-3 col-xl-2 class="col-margin" (click)="selectIncident('Breakdown')">
+          <div class = "imgcircle" >
+            <img class="iconincidents" src="assets/imgs/tow-truck1.png"/>
+          </div>
+          <p>Breakdown</p>
+      </ion-col>
+      
+    </ion-row>
+  </ion-grid>
+
+
+  <ion-grid *ngIf="!showIncident">
+      <h6>Incident: {{incidentSelected}}</h6>
+    <h6>Severity: </h6>
+    <ion-row>
+      
+        <ion-col col-4 col-md-3 col-xl-2 class="col-margin" (click)="selectSeverity('heavy')" [ngClass]="{'selectedseverity': severitySelected === 'heavy'}">
+          <button ion-fab color="danger" style="margin: 10px;">
+            <ion-icon name="md-star"></ion-icon>
+            <ion-icon name="md-star"></ion-icon>
+            <ion-icon name="md-star"></ion-icon>
+            
+          </button>
+          <p>Heavy </p>
+        </ion-col>
+        <ion-col col-4 col-md-3 col-xl-2 class="col-margin" (click)="selectSeverity('medium')" [ngClass]="{'selectedseverity': severitySelected === 'medium'}">
+            <button ion-fab color="medium" style="margin: 10px; color: #fff" >
+              <ion-icon name="md-star"></ion-icon>
+              <ion-icon name="md-star"></ion-icon>
+               
+            </button>
+            <p>Medium </p>
+          </ion-col>
+          <ion-col col-4 col-md-3 col-xl-2 class="col-margin" (click)="selectSeverity('low')" [ngClass]="{'selectedseverity': severitySelected === 'low'}">
+              <button ion-fab color="low" style="margin: 10px;">
+                <ion-icon name="md-star"></ion-icon>
+                
+              </button>
+              <p>Low </p>
+            </ion-col>
+    </ion-row>
+    <ion-row class="camerarow" (click)="takePhoto()">
+        <ion-col col-4 >
+          <div class="cameradiv" >
+              <ion-icon class="cameradivicon" name="md-camera"></ion-icon>
+          </div>
+        </ion-col>
+        <ion-col col-8 >
+          <div class="cameratxt" >
+            <span class="cameratxtspan">
+                Take a Picture
+                <ion-icon style="font-size: 20px !important;" name="ios-arrow-forward"></ion-icon>
+                
+            </span>
+          </div>
+         
+        </ion-col>
+    </ion-row>
+
+    <ion-row class="camerapic">
+        <ion-col col-4 *ngFor="let img of cameraPic; let id = index">
+            <div class="camerapicdiv"  >
+              <img [src]="img" class="camerapicimg"/>
+                <ion-icon (click)="deleteImg(id)" name="md-close-circle" color="header" class="deleteicon" ></ion-icon>
+            </div>
+        </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
