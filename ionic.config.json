@@ -1,7 +1,0 @@
-{
-  "name": "TomSmartWays",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "ionic-angular"
-}
