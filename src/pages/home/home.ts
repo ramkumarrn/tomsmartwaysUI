@@ -84,6 +84,8 @@ export class HomePage implements OnInit {
       })
     }).addTo(this.map);
 
+    
+   
   }
 
   displayIncidentMarkers(value) {
@@ -136,17 +138,27 @@ export class HomePage implements OnInit {
       } else {
         marker = tomtom.L.marker(incident.location).addTo(_this.map);
       }
-      var incidentDetails = '<div style=" width: 300px !important;"><div><h6> Incident Type: ' + incident.incidentType + '</h6></div><div><h6> Severity: ' + incident.severity + '</h6></div><div>';
 
+      var statusCircleStyle = 'border-radius: 50%; height:60% !important; width:33% !important; margin:auto !important; margin-top: 10% !important; '
+      incident.userVerified && incident.trafficVerified ? statusCircleStyle=statusCircleStyle+'border: solid 4px #0faa09;' : statusCircleStyle=statusCircleStyle+'border: solid 4px #6a6b6a;'
+
+      var userTickStyle = 'margin: auto !important; font-size: 28px;margin-left: 1px !important; font-weight: bold !important;'
+      incident.userVerified ? userTickStyle = userTickStyle+'color:#0faa09;' : userTickStyle = userTickStyle+'color:#6a6b6a;'
+
+      var trafficTickStyle = 'margin: auto !important; font-size: 28px; margin-left: -10px !important; font-weight: bold !important;'
+      incident.trafficVerified ? trafficTickStyle = trafficTickStyle+'color:#0faa09;' : trafficTickStyle = trafficTickStyle+'color:#6a6b6a;'
+      
+      //var incidentDetails = '<div style=" width: 300px !important;"><div><h6> Incident Type: ' + incident.incidentType + '</h6></div><div><h6> Severity: ' + incident.severity + '</h6></div><div>';
+
+      var incidentDetails = '<div style=" width: 300px !important;"><div class="row"><div class="col"><div><h6> Incident Type: ' + incident.incidentType + ' </h6></div><div><h6> Severity: ' + incident.severity + '</h6></div></div><div class="col" ><div style="'+statusCircleStyle+'"><span style="'+userTickStyle+'">&#10003;</span><span style="'+trafficTickStyle+'">&#10003;</span></div></div></div><div class="row">';
       var imgs = '';
       incident.images.forEach(function (image) {
         imgs = imgs + '<img src="' + image + '" style="widows: 60px !important; height: 60px !important; margin:10px !important;"/>'
       });
-      /*+'<img src="'+incident.images[0]+'" style="widows: 60px !important; height: 60px !important; margin:10px !important;"/>'
-      +'<img src="assets/imgs/gas1.png" style="widows: 60px !important; height: 60px !important; margin:10px !important;"/>'
-       +'<img src="assets/imgs/gas1.png" style="widows: 60px !important; height: 60px !important; margin:10px !important;"/></div></div>';*/
+      
       incidentDetails = incidentDetails + imgs + '</div></div>';
       marker.bindPopup(incidentDetails);
+      marker.incidentData = incident;
       //markers.addLayer(marker);
     });
 
@@ -154,9 +166,32 @@ export class HomePage implements OnInit {
 
   showIncident() {
     this.map.locate();
-    let myModal = this.modalCtrl.create(IncidentModalPage);
+    let myModal = this.modalCtrl.create(IncidentModalPage, {currentMarkers:this.getCurrentNearMarkers.bind(this)});
     myModal.present();
 
+  }
+
+  getCurrentNearMarkers(type){
+    console.log(type);
+    let currentMarkers = [];
+    var circle;
+    circle = new L.circle(this.currentLoc, 50).addTo(this.map);
+
+    this.map.eachLayer( function(layer) {
+      if(layer instanceof L.Marker) {
+        if(circle.getBounds().contains(layer.getLatLng()) && layer.incidentData && layer.incidentData.incidentType === type) {
+
+          currentMarkers.push(layer.incidentData);
+        }
+      }
+    });
+
+    this.locService.setCurrentLocNearMarkers(currentMarkers);
+
+    if (circle != undefined) {
+      this.map.removeLayer(circle);
+    }
+  
   }
 
   getIncidents() {

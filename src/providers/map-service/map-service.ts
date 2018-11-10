@@ -16,16 +16,20 @@ export class MapServiceProvider {
   }
 
   getIncidents(){
-    var url = 'https://node2-220718.appspot.com/aqi/getsmartdata';
+    var url = 'https://smartwayservice.hopto.org/aqi/getsmartdata';
     return this.http.get(url);
 
   };
 
   saveIncident(data){
     data.location = this.locService.getCurrentLoc();
-    var url = 'https://prime-bridge-220106.appspot.com/aqi/pushtoqueue';
-
-    return this.http.post(url, data);
+    var incidentData= {
+      incident: data,
+      nearByMarkers: this.locService.getCurrentLocNearMarkers()
+    }
+     var url = 'https://smartwayservice.hopto.org/api/pushtoqueue';
+    console.log(incidentData);
+    return this.http.post(url, incidentData);
 
   };
 

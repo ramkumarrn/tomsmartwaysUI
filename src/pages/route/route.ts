@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController, ToastController } from 'ionic-angular';
 import { IncidentModalPage } from '../incident-modal/incident-modal';
 import { MapServiceProvider } from '../../providers/map-service/map-service';
+import { LocationServiceProvider } from '../../providers/location-service/location-service';
 
 /**
  * Generated class for the RoutePage page.
@@ -21,7 +22,8 @@ export class RoutePage {
   currentLoc: any = {};
 
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, 
-    private mapService: MapServiceProvider, private toastCtrl: ToastController) {
+    private mapService: MapServiceProvider, private toastCtrl: ToastController,
+    private locService: LocationServiceProvider) {
 
   }
   ngOnInit() {
@@ -49,7 +51,7 @@ export class RoutePage {
     this.map.zoomControl.setPosition('topright');
 
     
-     this.map.locate({ setView: true, maxZoom: 11 });
+     this.map.locate({ setView: true, maxZoom: 12 });
     this.map.on('locationfound', this.getCurrentLoc, this);
     this.map.on('locationerror', this.getCurrentLocError, this);
 
@@ -59,9 +61,11 @@ export class RoutePage {
 
         // Connecting the routeInputs widget with the routeOnMap widget
         routeInputs.on(routeInputs.Events.LocationsFound, function(eventObject) {
-            routeOnMapView.draw(eventObject.points);
+          console.log('LocationsFound', eventObject)
+           routeOnMapView.draw(eventObject.points);
         });
         routeInputs.on(routeInputs.Events.LocationsCleared, function(eventObject) {
+          console.log('LocationsCleared', eventObject)
             routeOnMapView.draw(eventObject.points);
         });
 
@@ -73,6 +77,7 @@ export class RoutePage {
 
   getCurrentLoc(evt) {
     this.currentLoc = evt.latlng;
+    this.locService.setCurrentLoc(this.currentLoc);
     this.displayCurrentLocMarker();
   }
   getCurrentLocError() {
@@ -162,27 +167,54 @@ export class RoutePage {
         }else {
           marker = tomtom.L.marker(incident.location).addTo(_this.map);
         }
-       
-        var incidentDetails = '<div style=" width: 300px !important;"><div><h6> Incident Type: ' + incident.incidentType + '</h6></div><div><h6> Severity: ' + incident.severity + '</h6></div><div>';
+        var statusCircleStyle = 'border-radius: 50%; height:60% !important; width:33% !important; margin:auto !important; margin-top: 10% !important; '
+      incident.userVerified && incident.trafficVerified ? statusCircleStyle=statusCircleStyle+'border: solid 4px #0faa09;' : statusCircleStyle=statusCircleStyle+'border: solid 4px #6a6b6a;'
 
-        var imgs = '';
-        incident.images.forEach(function (image) {
-          imgs = imgs + '<img src="' + image + '" style="widows: 60px !important; height: 60px !important; margin:10px !important;"/>'
-        });
-        /*+'<img src="'+incident.images[0]+'" style="widows: 60px !important; height: 60px !important; margin:10px !important;"/>'
-        +'<img src="assets/imgs/gas1.png" style="widows: 60px !important; height: 60px !important; margin:10px !important;"/>'
-         +'<img src="assets/imgs/gas1.png" style="widows: 60px !important; height: 60px !important; margin:10px !important;"/></div></div>';*/
-        incidentDetails = incidentDetails + imgs + '</div></div>';
-        marker.bindPopup(incidentDetails);
+      var userTickStyle = 'margin: auto !important; font-size: 28px;margin-left: 1px !important; font-weight: bold !important;'
+      incident.userVerified ? userTickStyle = userTickStyle+'color:#0faa09;' : userTickStyle = userTickStyle+'color:#6a6b6a;'
+
+      var trafficTickStyle = 'margin: auto !important; font-size: 28px; margin-left: -10px !important; font-weight: bold !important;'
+      incident.trafficVerified ? trafficTickStyle = trafficTickStyle+'color:#0faa09;' : trafficTickStyle = trafficTickStyle+'color:#6a6b6a;'
+       
+      var incidentDetails = '<div style=" width: 300px !important;"><div class="row"><div class="col"><div><h6> Incident Type: ' + incident.incidentType + ' </h6></div><div><h6> Severity: ' + incident.severity + '</h6></div></div><div class="col" ><div style="'+statusCircleStyle+'"><span style="'+userTickStyle+'">&#10003;</span><span style="'+trafficTickStyle+'">&#10003;</span></div></div></div><div class="row">';
+      var imgs = '';
+      incident.images.forEach(function (image) {
+        imgs = imgs + '<img src="' + image + '" style="widows: 60px !important; height: 60px !important; margin:10px !important;"/>'
+      });
+      
+      incidentDetails = incidentDetails + imgs + '</div></div>';
+      marker.bindPopup(incidentDetails);
+      marker.incidentData = incident;
     });
       
     }
   
-
+    getCurrentNearMarkers(type){
+      console.log(type);
+      let currentMarkers = [];
+      var circle;
+      circle = new L.circle(this.currentLoc, 50).addTo(this.map);
+  
+      this.map.eachLayer( function(layer) {
+        if(layer instanceof L.Marker) {
+          if(circle.getBounds().contains(layer.getLatLng()) && layer.incidentData && layer.incidentData.incidentType === type) {
+  
+            currentMarkers.push(layer.incidentData);
+          }
+        }
+      });
+  
+      this.locService.setCurrentLocNearMarkers(currentMarkers);
+  
+      if (circle != undefined) {
+        this.map.removeLayer(circle);
+      }
+    
+    }
 
   showIncident() {
     this.map.locate();
-    let myModal = this.modalCtrl.create(IncidentModalPage);
+    let myModal = this.modalCtrl.create(IncidentModalPage, {currentMarkers:this.getCurrentNearMarkers.bind(this)});
     myModal.present();
 
   }
@@ -197,7 +229,7 @@ export class RoutePage {
   }
 
   locateMe(){
-    this.map.locate({ setView: true, maxZoom: 11 });
+    this.map.locate({ setView: true, maxZoom: 12 });
   }
 
   getIncidents() {

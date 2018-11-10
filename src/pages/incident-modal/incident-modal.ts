@@ -22,11 +22,12 @@ export class IncidentModalPage {
   severitySelected: string = '';
   cameraPic: any[] = [];
   loading: any;
-
+  getCurrentMarkers: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, 
     public viewCtrl: ViewController, private camera: Camera, private toast: ToastController,
     private mapService: MapServiceProvider, public loadingCtrl: LoadingController) {
       this.loading = this.loadingCtrl.create({spinner: 'dots'});
+      this.getCurrentMarkers =  this.navParams.get("currentMarkers");
   }
 
   close(){
@@ -36,6 +37,7 @@ export class IncidentModalPage {
     this.showIncident= false;
     this.modalTitle = 'Submit the Incident';
     this.incidentSelected = incident;
+    this.getCurrentMarkers(this.incidentSelected);
   }
   selectSeverity(val){
     this.severitySelected = val;
@@ -56,6 +58,9 @@ export class IncidentModalPage {
       console.log(value);
       this.loading.dismiss();
       this.viewCtrl.dismiss();
+   }, (err) => {
+    console.log(err);
+    this.loading.dismiss();
    });
     
   }

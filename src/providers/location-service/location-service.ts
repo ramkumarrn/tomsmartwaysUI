@@ -11,6 +11,7 @@ import { Injectable } from '@angular/core';
 export class LocationServiceProvider {
 
   currentLocation: any={}
+  currentLocNearMarkers: any= []
   constructor() {
     console.log('Hello LocationServiceProvider Provider');
   }
@@ -20,6 +21,14 @@ export class LocationServiceProvider {
   }
   getCurrentLoc(){
     return this.currentLocation;
+  }
+
+  setCurrentLocNearMarkers(markers){
+    this.currentLocNearMarkers = markers;
+  }
+
+  getCurrentLocNearMarkers(){
+    return this.currentLocNearMarkers;
   }
 
 }
