@@ -63,10 +63,10 @@
   <ion-grid *ngIf="!showIncident">
       <h6>Incident: {{incidentSelected}}</h6>
     <h6>Severity: </h6>
-    <ion-row>
+    <ion-row style="margin-top: 6px; margin-bottom:6px;">
       
         <ion-col col-4 col-md-3 col-xl-2 class="col-margin" (click)="selectSeverity('high')" [ngClass]="{'selectedseverity': severitySelected === 'high'}">
-          <button ion-fab color="danger" style="margin: 10px;">
+          <button ion-fab color="danger" style="margin: 10px; margin-left: 14px; ">
             <ion-icon name="md-star"></ion-icon>
             <ion-icon name="md-star"></ion-icon>
             <ion-icon name="md-star"></ion-icon>
@@ -75,7 +75,7 @@
           <p>Heavy </p>
         </ion-col>
         <ion-col col-4 col-md-3 col-xl-2 class="col-margin" (click)="selectSeverity('medium')" [ngClass]="{'selectedseverity': severitySelected === 'medium'}">
-            <button ion-fab color="medium" style="margin: 10px; color: #fff" >
+            <button ion-fab color="medium" style="margin: 10px; margin-left: 14px; color: #fff" >
               <ion-icon name="md-star"></ion-icon>
               <ion-icon name="md-star"></ion-icon>
                
@@ -83,7 +83,7 @@
             <p>Medium </p>
           </ion-col>
           <ion-col col-4 col-md-3 col-xl-2 class="col-margin" (click)="selectSeverity('low')" [ngClass]="{'selectedseverity': severitySelected === 'low'}">
-              <button ion-fab color="low" style="margin: 10px;">
+              <button ion-fab color="low" style="margin: 10px; margin-left: 13px; ">
                 <ion-icon name="md-star"></ion-icon>
                 
               </button>

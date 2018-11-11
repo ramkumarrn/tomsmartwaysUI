@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController, LoadingController, ToastController } from 'ionic-angular';
+import { NavController, ModalController, LoadingController, ToastController } from 'ionic-angular';
 import { NearbyModalPage } from '../nearby-modal/nearby-modal';
 import { MapServiceProvider } from '../../providers/map-service/map-service';
 import { LocationServiceProvider } from '../../providers/location-service/location-service';
@@ -62,7 +62,7 @@ export class NearbyPage {
   getCurrentLocError() {
     this.toastCtrl.create({
       message: "We Couldn\'t find your location",
-      duration: 5000,
+      duration: 3000,
       position: 'middle',
       cssClass: "toast-msg"
     }).present();
@@ -116,6 +116,15 @@ export class NearbyPage {
       //console.log(value);
       this.loading.dismiss();
       this.displayNearByLocMarkers(value,query);
+   }, (err) => {
+    console.log(err);
+    this.loading.dismiss();
+    this.toastCtrl.create({
+      message: "Something went wrong",
+      duration: 2000,
+      position: 'middle',
+      cssClass: "toast-msg"
+    }).present();
    });
 
   }

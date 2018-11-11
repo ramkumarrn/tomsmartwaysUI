@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, LoadingController, ToastController } from 'ionic-angular';
+import { NavController, NavParams, ViewController, LoadingController, ToastController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { MapServiceProvider } from '../../providers/map-service/map-service';
 
@@ -43,25 +43,41 @@ export class IncidentModalPage {
     this.severitySelected = val;
   }
   done(){
-    var data = {
-      incidentType: '',
-      severity: '',
-      images: [],
-      location: {}
-    }
-
-    data.incidentType = this.incidentSelected;
-    data.severity = this.severitySelected;
-    data.images = this.cameraPic;
-    this.loading.present();
-    this.mapService.saveIncident(data).subscribe(value => {
-      console.log(value);
+    if(this.severitySelected !== ''){
+      var data = {
+        incidentType: '',
+        severity: '',
+        images: [],
+        location: {}
+      }
+  
+      data.incidentType = this.incidentSelected;
+      data.severity = this.severitySelected;
+      data.images = this.cameraPic;
+      this.loading.present();
+      this.mapService.saveIncident(data).subscribe(value => {
+        console.log(value);
+        this.loading.dismiss();
+        this.viewCtrl.dismiss();
+     }, (err) => {
+      console.log(err);
       this.loading.dismiss();
-      this.viewCtrl.dismiss();
-   }, (err) => {
-    console.log(err);
-    this.loading.dismiss();
-   });
+      this.toast.create({
+        message: "Something went wrong",
+        duration: 2000,
+        position: 'middle',
+        cssClass: "toast-msg"
+      }).present();
+     });
+    }else{
+      this.toast.create({
+        message: 'Please Select the severity...',
+        duration: 2000,
+        position: 'middle',
+        cssClass: "toast-msg"
+      }).present();
+    }
+   
     
   }
   deleteImg(index){
@@ -99,7 +115,7 @@ export class IncidentModalPage {
     else{
       this.toast.create({
         message: 'You can post only 3 images.. Still want add image please delete one from the images',
-        duration: 5000,
+        duration: 3000,
         position: 'middle',
         cssClass: "toast-msg"
       }).present();

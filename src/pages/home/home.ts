@@ -3,7 +3,6 @@ import { NavController, ModalController, ToastController } from 'ionic-angular';
 import { IncidentModalPage } from '../incident-modal/incident-modal';
 import { LocationServiceProvider } from '../../providers/location-service/location-service';
 import { MapServiceProvider } from '../../providers/map-service/map-service';
-import { Toast } from '@ionic-native/toast';
 
 @Component({
   selector: 'page-home',
@@ -59,7 +58,7 @@ export class HomePage implements OnInit {
   getCurrentLocError() {
     this.toastCtrl.create({
       message: "We Couldn\'t find your location",
-      duration: 5000,
+      duration: 3000,
       position: 'middle',
       cssClass: "toast-msg"
     }).present();
@@ -205,7 +204,7 @@ export class HomePage implements OnInit {
 
     this.toastCtrl.create({
       message: 'Request Sent to your emergency contacts',
-      duration: 5000,
+      duration: 3000,
       position: 'middle',
       cssClass: "toast-msg"
     }).present();

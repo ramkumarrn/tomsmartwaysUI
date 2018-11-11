@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController, ToastController } from 'ionic-angular';
+import { NavController, ModalController, ToastController } from 'ionic-angular';
 import { IncidentModalPage } from '../incident-modal/incident-modal';
 import { MapServiceProvider } from '../../providers/map-service/map-service';
 import { LocationServiceProvider } from '../../providers/location-service/location-service';
@@ -30,8 +30,6 @@ export class RoutePage {
     tomtom.routingKey('925XUD4MhjVJnTe9Zza1FWfjfhkIKxDI');
     tomtom.searchKey('925XUD4MhjVJnTe9Zza1FWfjfhkIKxDI');
 
-
-     
   }
 
   showMap(){
@@ -83,7 +81,7 @@ export class RoutePage {
   getCurrentLocError() {
     this.toastCtrl.create({
       message: "We Couldn\'t find your location",
-      duration: 5000,
+      duration: 3000,
       position: 'middle',
       cssClass: "toast-msg"
     }).present();
@@ -221,7 +219,7 @@ export class RoutePage {
   sos() {
     this.toastCtrl.create({
       message: "Request Sent to your emergency contacts",
-      duration: 5000,
+      duration: 3000,
       position: 'middle',
       cssClass: "toast-msg"
     }).present();
