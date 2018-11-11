@@ -11,6 +11,8 @@ log.txt
 *.sublime-workspace
 .vscode/
 npm-debug.log*
+.DS_Store
+package-lock.json
 
 .idea/
 .ionic/
